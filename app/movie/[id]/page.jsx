@@ -4,12 +4,12 @@ import MoviewContainer from "@/containers/movie";
 
 import Movies from "@/mocks/movies.json";
 
-async function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+// async function delay(ms) {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// }
 
-const MoviePage = async ({ params, searchParams }) => {
-  await delay(3000); // Simulating network delay
+const MoviePage = ({ params, searchParams }) => {
+  // await delay(3000); // Simulating network delay
   const movieDetail = Movies.results.find((m) => m.id === +params.id);
 
   if (!movieDetail) {
