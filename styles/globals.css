@@ -1,4 +1,22 @@
+html {
+  font-family: var(--font-inter);
+}
+
 body {
   background-color: #000;
   font-size: 1rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr min(1440px, 94%) 1fr;
+  grid-template-rows: 96px auto 72px;
+}
+
+.container > * {
+  grid-column: 2;
+}
+
+.container > .fluid {
+  grid-column: 1/-1;
 }
