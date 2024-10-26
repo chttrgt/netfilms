@@ -2,15 +2,32 @@ import React from "react";
 import { notFound } from "next/navigation";
 import MoviewContainer from "@/containers/movie";
 
-import Movies from "@/mocks/movies.json";
-
 // async function delay(ms) {
 //   return new Promise((resolve) => setTimeout(resolve, ms));
 // }
 
-const MoviePage = ({ params, searchParams }) => {
+const API_URL = "https://api.themoviedb.org/3";
+
+const getMovie = async (movieId) => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYjBlNGQwMzQ2MDUzMWExN2MzNjg5OGM0MTgzNTM0YSIsIm5iZiI6MTcyOTk3MDcwMi4yNTQ5MjUsInN1YiI6IjY3MWQzZWYyYTRhYzhhNDMyYzVjNzlkYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TNxOH0oUu1bHb-Z7q386D2esE6d6Vek31gJYi0zA43s",
+    },
+  };
+  const res = await fetch(
+    `${API_URL}/movie/${movieId}?language=en-US&page=1}`,
+    options
+  );
+  return res.json();
+};
+
+const MoviePage = async ({ params, searchParams }) => {
   // await delay(3000); // Simulating network delay
-  const movieDetail = Movies.results.find((m) => m.id === +params.id);
+
+  const movieDetail = await getMovie(params.id);
 
   if (!movieDetail) {
     notFound();
